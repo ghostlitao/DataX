@@ -237,6 +237,15 @@
             <outputDirectory>datax</outputDirectory>
         </fileSet>
 
+
+        <fileSet>
+            <directory>mdyhttpreader/target/datax/</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+            <outputDirectory>datax</outputDirectory>
+        </fileSet>
+
         <!-- writer -->
         <fileSet>
             <directory>mysqlwriter/target/datax/</directory>
@@ -511,5 +520,6 @@
             </includes>
             <outputDirectory>datax</outputDirectory>
         </fileSet>
+
     </fileSets>
 </assembly>

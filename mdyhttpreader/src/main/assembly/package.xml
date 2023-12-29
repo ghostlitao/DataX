@@ -20,7 +20,7 @@
         <fileSet>
             <directory>target/</directory>
             <includes>
-                <include>mdyhttpreader-0.0.1-SNAPSHOT.jar</include>
+                <include>mdyhttpreader-1.0.0.jar</include>
             </includes>
             <outputDirectory>plugin/reader/mdyhttpreader</outputDirectory>
         </fileSet>

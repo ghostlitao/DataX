@@ -65,7 +65,7 @@ public class MdyHttpReader extends Reader {
             JSONObject totalObj = JSON.parseObject(totalInfo);
             int totalNum = totalObj.getIntValue("data");
             // 计算页数
-            int pageNum = (int) Math.ceil(totalNum / pageSize);
+            int pageNum = (int) Math.ceil((double) totalNum / pageSize);
             for (int i = 1; i <= pageNum; i++) {
                 Configuration conf = originalConfig.clone();
                 conf.set("pageIndex", i);
@@ -142,29 +142,72 @@ public class MdyHttpReader extends Reader {
                 this.columns.stream().map(column -> (JSONObject) column).forEach(column -> {
                     String columnName = column.getString("name");
                     String columnType = column.getString("type");
-                    // 根据类型转换
-                    switch (columnType) {
-                        case "string":
-                            record.addColumn(new StringColumn(row.getString(columnName)));
-                            break;
-                        case "int":
-                        case "number":
-                        case "long":
-                        case "double":
-                        case "float":
-                            record.addColumn(new DoubleColumn(row.getDouble(columnName)));
-                        case "date":
-                            record.addColumn(new DateColumn(row.getDate(columnName)));
-                            break;
-                        default:
-                            record.addColumn(new StringColumn(row.getString(columnName)));
-                            break;
+                    // ["caid", "uaid", "ownerid"];
+                    String[] userInfoIds = {"caid", "uaid", "ownerid"};
+                    if (Arrays.asList(userInfoIds).contains(columnName)) {
+                        JSONObject userInfo = row.getJSONObject(columnName);
+                        record.addColumn(new StringColumn(userInfo.getString("accountId")));
+                    } else {
+                        // 根据类型转换
+                        switch (columnType) {
+                            case "int":
+                            case "number":
+                            case "long":
+                            case "double":
+                            case "float":
+                                record.addColumn(new DoubleColumn(row.getDouble(columnName)));
+                                break;
+                            case "date":
+                            case "datetime":
+                                record.addColumn(new DateColumn(row.getDate(columnName)));
+                                break;
+                            // 关系类型
+                            case "attachment":
+                            case "attach":
+                                JSONArray attachmentInfo = JSON.parseArray(row.getString(columnName));
+                                if (attachmentInfo == null) {
+                                    record.addColumn(new StringColumn(""));
+                                    break;
+                                }
+                                // ，拼接 result
+                                record.addColumn(new StringColumn(String.join(",", attachmentInfo.stream().map(attachment -> (JSONObject) attachment).map(attachment -> attachment.getString("DownloadUrl")).toArray(String[]::new))));
+                                break;
+                            case "ref":
+                            case "reference":
+                                JSONArray refInfo = JSON.parseArray(row.getString(columnName));
+                                List<String> refIds = new ArrayList<>();
+                                // 遍历 refInfo
+                                refInfo.forEach(ref -> {
+                                    // 如果 ref 是 String 类型，直接添加
+                                    if (ref instanceof String) {
+                                        refIds.add((String) ref);
+                                    } else {
+                                        // 如果 ref 是 JSONObject 类型，获取 sid
+                                        refIds.add(((JSONObject) ref).getString("sid"));
+                                    }
+                                });
+                                //sid
+                                record.addColumn(new StringColumn(String.join(",", refIds)));
+                                break;
+                            case "member":
+                            case "members":
+                                JSONArray memberInfo = JSON.parseArray(row.getString(columnName));
+                                if (memberInfo == null) {
+                                    record.addColumn(new StringColumn(""));
+                                    break;
+                                }
+                                // accountId
+                                record.addColumn(new StringColumn(String.join(",", memberInfo.stream().map(member -> (JSONObject) member).map(member -> member.getString("accountId")).toArray(String[]::new))));
+                                break;
+                            default:
+                                record.addColumn(new StringColumn(row.getString(columnName)));
+                                break;
+                        }
                     }
                 });
                 recordSender.sendToWriter(record);
             }
         }
-
 
         @Override
         public void destroy() {

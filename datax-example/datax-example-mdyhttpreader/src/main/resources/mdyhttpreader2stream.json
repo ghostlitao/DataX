@@ -5,14 +5,10 @@
         "reader": {
           "name": "mdyhttpreader",
           "parameter": {
-            "host": "https://qtools.rinsys.com",
-            "appKey": "",
-            "sign": "",
-            "worksheetId": "renwu",
-            "viewId": "",
+            "appKey": "2259e40c1428f3fb",
             "column": [
               {
-                "name": "task_id",
+                "name": "rowid",
                 "type": "string"
               },
               {
@@ -26,8 +22,48 @@
               {
                 "name": "end",
                 "type": "date"
+              },
+              {
+                "name": "ctime",
+                "type": "date"
+              },
+              {
+                "name": "ref_customer",
+                "type": "ref"
+              },
+              {
+                "name": "desc",
+                "type": "string"
+              },
+              {
+                "name": "price",
+                "type": "number"
+              },
+              {
+                "name": "pic",
+                "type": "member"
+              },
+              {
+                "name": "members",
+                "type": "member"
+              },
+              {
+                "name": "duration",
+                "type": "number"
+              },
+              {
+                "name": "ref_task",
+                "type": "ref"
+              },
+              {
+                "name": "attach",
+                "type": "attach"
               }
-            ]
+            ],
+            "host": "https://qtools.rinsys.com",
+            "sign": "MzhiYzI3ZGE5YjgyZGQwNzA1YTM3OGMxYWRkZDM5MGFlMTBiOTExOWNhOGM2YTExNTJlNjkwYjIwNmQxZjgxNQ==",
+            "viewId": "",
+            "worksheetId": "xiangmu"
           }
         },
         "writer": {
