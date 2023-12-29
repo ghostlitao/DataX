@@ -6,8 +6,8 @@
           "name": "mdyhttpreader",
           "parameter": {
             "host": "https://qtools.rinsys.com",
-            "appKey": "2259e40c1428f3fb",
-            "sign": "MzhiYzI3ZGE5YjgyZGQwNzA1YTM3OGMxYWRkZDM5MGFlMTBiOTExOWNhOGM2YTExNTJlNjkwYjIwNmQxZjgxNQ==",
+            "appKey": "",
+            "sign": "",
             "worksheetId": "renwu",
             "viewId": "",
             "column": [
