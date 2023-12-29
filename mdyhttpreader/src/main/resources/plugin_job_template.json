@@ -1,0 +1,28 @@
+{
+  "name": "mdyhttpreader",
+  "parameter": {
+    "host": "",
+    "appKey": "",
+    "sign": "",
+    "worksheetId": "",
+    "viewId": "",
+    "column": [
+      {
+        "name": "task_id",
+        "type": "string"
+      },
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "start",
+        "type": "date"
+      },
+      {
+        "name": "end",
+        "type": "date"
+      }
+    ]
+  }
+}

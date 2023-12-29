@@ -1,0 +1,6 @@
+{
+  "name": "mdyhttpreader",
+  "class": "com.alibaba.datax.plugin.reader.mdyhttpreader.MdyHttpReader",
+  "description": "A mdy http reader plugin for datax.",
+  "developer": "ghostlitao"
+}

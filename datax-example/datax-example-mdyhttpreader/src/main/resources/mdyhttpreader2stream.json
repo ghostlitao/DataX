@@ -1,0 +1,48 @@
+{
+  "job": {
+    "content": [
+      {
+        "reader": {
+          "name": "mdyhttpreader",
+          "parameter": {
+            "host": "https://qtools.rinsys.com",
+            "appKey": "2259e40c1428f3fb",
+            "sign": "MzhiYzI3ZGE5YjgyZGQwNzA1YTM3OGMxYWRkZDM5MGFlMTBiOTExOWNhOGM2YTExNTJlNjkwYjIwNmQxZjgxNQ==",
+            "worksheetId": "renwu",
+            "viewId": "",
+            "column": [
+              {
+                "name": "task_id",
+                "type": "string"
+              },
+              {
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "name": "start",
+                "type": "date"
+              },
+              {
+                "name": "end",
+                "type": "date"
+              }
+            ]
+          }
+        },
+        "writer": {
+          "name": "streamwriter",
+          "parameter": {
+            "encoding": "UTF-8",
+            "print": true
+          }
+        }
+      }
+    ],
+    "setting": {
+      "speed": {
+        "channel": 5
+      }
+    }
+  }
+}
