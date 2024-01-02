@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  */
 public class MdyHttpReader extends Reader {
 
-    protected static final int pageSize = 10;
+    protected static final int pageSize = 1000;
 
     public static class Job extends Reader.Job {
 
